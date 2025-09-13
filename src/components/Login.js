@@ -1,29 +1,33 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation(); // Removed as not directly used for displaying messages
+  const { login } = useContext(AuthContext);
 
   // Display message if redirected from a private route
-  React.useEffect(() => {
-    if (location.state && location.state.message) {
-      setMessage(location.state.message);
-    }
-  }, [location.state]);
+  // React.useEffect(() => {
+  //   if (location.state && location.state.message) {
+  //     setMessage(location.state.message);
+  //   }
+  // }, [location.state]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
-      localStorage.setItem('token', res.data.token);
-      setMessage('You Made It!');
-      navigate('/admin/upload'); // Redirect to admin upload page or dashboard
+      const success = await login(username, password);
+      if (success) {
+        setMessage('You Made It!');
+        navigate('/admin/upload'); // Redirect to admin upload page or dashboard
+      } else {
+        setMessage('Login failed. Please try again.');
+      }
     } catch (err) {
       console.error(err);
       setMessage(err.response?.data?.msg || 'Error logging in');

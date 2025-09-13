@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import VideoList from './components/VideoList';
 import VideoPlayer from './components/VideoPlayer';
 import AdminUpload from './components/AdminUpload';
-import Login from './components/Login';
 import Register from './components/Register';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 
+// Main App component with routing
 function App() {
   return (
     <Router>
