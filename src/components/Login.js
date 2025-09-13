@@ -23,8 +23,8 @@ const Login = () => {
     try {
       const success = await login(username, password);
       if (success) {
-        setMessage('You Made It!');
-        navigate('/admin/upload'); // Redirect to admin upload page or dashboard
+        setMessage('You Made It!'); // Display message on successful login
+        navigate('/videos'); // Redirect to videos page after login
       } else {
         setMessage('Login failed. Please try again.');
       }

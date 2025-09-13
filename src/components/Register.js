@@ -15,8 +15,9 @@ const Register = () => {
     try {
       const success = await register(username, password);
       if (success) {
-        setMessage('You Made It!');
-        navigate('/admin/upload'); // Redirect to admin upload page
+        // After successful registration, redirect to login page
+        setMessage('Registration successful! Please log in.');
+        navigate('/login');
       } else {
         setMessage('Registration failed. Please try again.');
       }

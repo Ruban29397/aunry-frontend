@@ -9,22 +9,22 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/login'); // Redirect to login page after logout
   };
 
   return (
     <nav className="navbar">
       <Link to="/videos" className="navbar-brand">Aunry Videos</Link>
       <div className="navbar-links">
-        {user && user.role === 'admin' && user.username === 'rubanpaul' && (
+        {user && (
           <Link to="/admin/upload" className="navbar-item">Upload Video</Link>
         )}
         {user ? (
           <button onClick={handleLogout} className="navbar-item">Logout ({user.username})</button>
         ) : (
           <>
-            {/* <Link to="/login" className="navbar-item">Login</Link> Removed login link */}
-            <Link to="/" className="navbar-item">Register</Link>
+            <Link to="/login" className="navbar-item">Login</Link>
+            <Link to="/register" className="navbar-item">Register</Link>
           </>
         )}
       </div>
